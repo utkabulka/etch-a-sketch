@@ -1,5 +1,5 @@
 const sketchpadContainer = document.querySelector(".sketchpad");
-const resetButton = document.querySelector("#reset-button");
+const clearButton = document.querySelector("#clear-button");
 const randomColorsButton = document.querySelector("#random-colors-button");
 const colorPickerInput = document.querySelector("#color-picker");
 const drawButton = document.querySelector("#draw-button");
@@ -16,7 +16,7 @@ let selectedColor = "#000000";
 
 initSketchpad(false);
 
-resetButton.onclick = () => initSketchpad(false);
+clearButton.onclick = () => initSketchpad(false);
 randomColorsButton.onclick = () => initSketchpad(true);
 
 colorPickerInput.oninput = (e) => {

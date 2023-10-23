@@ -4,10 +4,18 @@ const randomColorsButton = document.querySelector("#random-colors-button");
 
 let gridSize = 16;
 
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
+
 initSketchpad(false);
 
 resetButton.onclick = () => initSketchpad(false);
 randomColorsButton.onclick = () => initSketchpad(true);
+
+function getRandomColor() {
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
 
 function initSketchpad(randomColor = false) {
   sketchpadContainer.textContent = "";
@@ -20,12 +28,19 @@ function initSketchpad(randomColor = false) {
       let newPixel = document.createElement("div");
       newPixel.className = "pixel";
 
+      newPixel.addEventListener("mouseover", handleMouse);
+
       if (randomColor) {
-        newPixel.style.backgroundColor =
-          "#" + Math.floor(Math.random() * 16777215).toString(16);
+        newPixel.style.backgroundColor = getRandomColor();
       }
 
       sketchpadContainer.appendChild(newPixel);
     }
+  }
+}
+
+function handleMouse(e) {
+  if (mouseDown) {
+    e.target.style.backgroundColor = getRandomColor();
   }
 }

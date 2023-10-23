@@ -5,6 +5,7 @@ const colorPickerInput = document.querySelector("#color-picker");
 const drawButton = document.querySelector("#draw-button");
 const eraserButton = document.querySelector("#eraser-button");
 
+// TODO: implement field resizing
 let gridSize = 16;
 
 let mouseDown = false;

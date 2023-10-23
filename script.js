@@ -1,6 +1,7 @@
 const sketchpadContainer = document.querySelector(".sketchpad");
 const resetButton = document.querySelector("#reset-button");
 const randomColorsButton = document.querySelector("#random-colors-button");
+const colorPickerInput = document.querySelector("#color-picker");
 const drawButton = document.querySelector("#draw-button");
 const eraserButton = document.querySelector("#eraser-button");
 
@@ -18,12 +19,19 @@ initSketchpad(false);
 resetButton.onclick = () => initSketchpad(false);
 randomColorsButton.onclick = () => initSketchpad(true);
 
+colorPickerInput.oninput = (e) => {
+  selectedColor = e.target.value;
+}
 drawButton.onclick = () => {
   erasing = false;
 };
 eraserButton.onclick = () => {
   erasing = true;
 };
+
+window.onload = () => {
+  selectedColor = colorPickerInput.value;
+}
 
 function getRandomColor() {
   return "#" + Math.floor(Math.random() * 16777215).toString(16);

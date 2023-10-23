@@ -1,6 +1,8 @@
 const sketchpadContainer = document.querySelector(".sketchpad");
 const resetButton = document.querySelector("#reset-button");
 const randomColorsButton = document.querySelector("#random-colors-button");
+const drawButton = document.querySelector("#draw-button");
+const eraserButton = document.querySelector("#eraser-button");
 
 let gridSize = 16;
 
@@ -8,10 +10,20 @@ let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
+let erasing = false;
+let selectedColor = "#000000";
+
 initSketchpad(false);
 
 resetButton.onclick = () => initSketchpad(false);
 randomColorsButton.onclick = () => initSketchpad(true);
+
+drawButton.onclick = () => {
+  erasing = false;
+};
+eraserButton.onclick = () => {
+  erasing = true;
+};
 
 function getRandomColor() {
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -43,5 +55,9 @@ function initSketchpad(randomColor = false) {
 function handleMouse(e) {
   if (e.type == "mouseover" && !mouseDown) return;
 
-  e.target.style.backgroundColor = getRandomColor();
+  if (erasing) {
+    e.target.style.backgroundColor = "#ffffff";
+  } else {
+    e.target.style.backgroundColor = selectedColor;
+  }
 }

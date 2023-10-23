@@ -29,6 +29,7 @@ function initSketchpad(randomColor = false) {
       newPixel.className = "pixel";
 
       newPixel.addEventListener("mouseover", handleMouse);
+      newPixel.addEventListener("mousedown", handleMouse);
 
       if (randomColor) {
         newPixel.style.backgroundColor = getRandomColor();
@@ -40,7 +41,7 @@ function initSketchpad(randomColor = false) {
 }
 
 function handleMouse(e) {
-  if (mouseDown) {
-    e.target.style.backgroundColor = getRandomColor();
-  }
+  if (e.type == "mouseover" && !mouseDown) return;
+
+  e.target.style.backgroundColor = getRandomColor();
 }
